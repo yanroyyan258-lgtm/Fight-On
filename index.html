@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#101827">
+  <title>Fight On</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="lockScreen" class="lock-screen hidden">
+    <div class="lock-card">
+      <div class="brand-mark">FO</div>
+      <h1>Fight On</h1>
+      <p>Aplikasi terkunci. Masukkan PIN untuk melanjutkan.</p>
+      <input id="unlockPin" inputmode="numeric" maxlength="6" type="password" placeholder="Masukkan PIN">
+      <button id="unlockBtn" class="primary">Buka aplikasi</button>
+      <p id="lockMessage" class="muted small"></p>
+    </div>
+  </div>
+
+  <header class="topbar">
+    <div><div class="eyebrow">YOUR PERSONAL PROGRESS</div><div class="brand">FIGHT <span>ON</span></div></div>
+    <button class="icon-btn" id="quickSettings" aria-label="Pengaturan">⚙</button>
+  </header>
+
+  <main>
+    <section class="page active" id="page-home">
+      <div class="greeting"><div><div class="eyebrow" id="todayDate">HARI INI</div><h1>Terus bertumbuh.</h1></div><div class="live-clock" id="liveClock">00:00:00</div></div>
+      <div class="hero-card">
+        <div class="eyebrow">WAKTU KONSISTEN</div>
+        <div class="streak" id="streakDays">0 <small>hari</small></div>
+        <div class="timer-grid">
+          <div><b id="timerHours">00</b><span>JAM</span></div>
+          <div><b id="timerMinutes">00</b><span>MENIT</span></div>
+          <div><b id="timerSeconds">00</b><span>DETIK</span></div>
+        </div>
+        <div class="progress-track"><div id="goalProgress" class="progress-fill"></div></div>
+        <div class="between small"><span id="goalLabel">Target berikutnya</span><span id="goalPercent">0%</span></div>
+      </div>
+      <div class="stats-row">
+        <div class="stat-card"><span class="muted">Rekor terbaik</span><strong id="bestRecord">0 hari</strong></div>
+        <div class="stat-card"><span class="muted">Target aktif</span><strong id="activeGoal">7 hari</strong></div>
+      </div>
+      <div class="section-heading"><h2>Langkah hari ini</h2><span class="muted small">Satu hari setiap kali</span></div>
+      <div class="action-card"><div class="action-icon">✦</div><div class="action-copy"><b>Alihkan perhatian</b><p>Pilih aktivitas positif saat dorongan muncul.</p></div><button class="text-btn" data-page="tools">Lihat</button></div>
+      <div class="action-card"><div class="action-icon">✎</div><div class="action-copy"><b>Jurnal singkat</b><p>Catat perasaan atau kemajuanmu hari ini.</p></div><button class="text-btn" data-page="history">Tulis</button></div>
+      <button id="resetBtn" class="danger-outline full">Catat kemunduran / mulai ulang timer</button>
+      <p class="muted tiny center">Kemunduran bukan akhir. Riwayat dan pembelajaranmu tetap tersimpan.</p>
+    </section>
+
+    <section class="page" id="page-history">
+      <div class="page-title"><div class="eyebrow">PERJALANANMU</div><h1>Riwayat</h1><p>Catatan perkembangan dan jurnal pribadi.</p></div>
+      <div class="panel">
+        <h3>Kalender aktivitas</h3><div id="calendar" class="calendar"></div><div class="legend"><span>● Hari tercatat</span><span>○ Hari lainnya</span></div>
+      </div>
+      <div class="panel">
+        <h3>Tulis jurnal</h3><textarea id="journalText" rows="3" placeholder="Apa yang kamu pelajari hari ini?"></textarea>
+        <button id="saveJournal" class="primary">Simpan jurnal</button>
+      </div>
+      <div class="panel"><h3>Riwayat terbaru</h3><div id="historyList" class="history-list"></div></div>
+    </section>
+
+    <section class="page" id="page-target">
+      <div class="page-title"><div class="eyebrow">TETAP PUNYA ARAH</div><h1>Target</h1><p>Pilih tujuan yang realistis dan bisa kamu evaluasi.</p></div>
+      <div class="target-grid" id="targetChoices">
+        <button data-days="7">7 hari</button><button data-days="14">14 hari</button><button data-days="30">30 hari</button><button data-days="60">60 hari</button><button data-days="90">90 hari</button>
+      </div>
+      <div class="panel">
+        <h3>Target khusus</h3><label for="customDays">Durasi target (hari)</label><div class="inline-form"><input id="customDays" type="number" min="1" max="3650" placeholder="Contoh: 21"><button id="setCustomGoal" class="primary">Atur</button></div>
+      </div>
+      <div class="panel"><h3>Target saat ini</h3><div class="big-number" id="targetCurrent">7 hari</div><p class="muted" id="targetDescription">Fokus pada proses hari ini.</p></div>
+      <div class="panel"><h3>Pencapaian</h3><div id="achievements" class="achievement-list"></div></div>
+    </section>
+
+    <section class="page" id="page-statistics">
+      <div class="page-title"><div class="eyebrow">LIHAT PERKEMBANGAN</div><h1>Statistik</h1><p>Angka untuk refleksi, bukan untuk menghakimi diri.</p></div>
+      <div class="stats-row">
+        <div class="stat-card"><span class="muted">Hari konsisten saat ini</span><strong id="statCurrent">0</strong></div>
+        <div class="stat-card"><span class="muted">Rekor terbaik</span><strong id="statBest">0</strong></div>
+      </div>
+      <div class="panel"><h3>Ringkasan</h3><div class="metric-line"><span>Target selesai</span><b id="completedGoals">0</b></div><div class="metric-line"><span>Jurnal tersimpan</span><b id="journalCount">0</b></div><div class="metric-line"><span>Catatan reset</span><b id="resetCount">0</b></div></div>
+      <div class="panel"><h3>Perkembangan 7 hari</h3><div id="weekBars" class="week-bars"></div><p class="muted tiny">Menandai hari yang memiliki jurnal atau catatan perkembangan.</p></div>
+    </section>
+
+    <section class="page" id="page-tools">
+      <div class="page-title"><div class="eyebrow">KETIKA DORONGAN MUNCUL</div><h1>Mode jeda</h1><p>Berhenti sejenak, ubah suasana, dan pilih langkah kecil berikutnya.</p></div>
+      <div class="panel breathing"><div class="breath-circle">TARIK<br>NAPAS</div><h3>Ambil jeda 60 detik</h3><p class="muted">Bernapas perlahan, letakkan ponsel, lalu pindah ke tempat yang lebih terbuka.</p><button id="breathBtn" class="primary">Mulai jeda</button><div id="breathStatus" class="muted small"></div></div>
+      <div class="panel"><h3>Pilih aktivitas pengalihan</h3><div class="activity-list"><div>🚶 Jalan sebentar</div><div>💧 Minum air</div><div>📖 Baca beberapa halaman</div><div>🧹 Rapikan area sekitar</div><div>📞 Hubungi orang tepercaya</div></div></div>
+      <div class="panel"><h3>Pengingat untuk diri sendiri</h3><textarea id="promiseText" rows="3" placeholder="Alasan dan tujuan yang ingin kamu ingat..."></textarea><button id="savePromise" class="primary">Simpan pengingat</button></div>
+    </section>
+
+    <section class="page" id="page-settings">
+      <div class="page-title"><div class="eyebrow">PREFERENSI</div><h1>Pengaturan</h1><p>Atur tampilan, privasi, dan pengingat.</p></div>
+      <div class="panel">
+        <h3>Tampilan</h3><div class="setting-row"><span>Tema aplikasi</span><select id="themeSelect"><option value="system">Ikuti sistem</option><option value="dark">Dark mode</option><option value="light">Light mode</option></select></div>
+      </div>
+      <div class="panel">
+        <h3>Keamanan</h3><div class="setting-row"><span>Kunci dengan PIN</span><span id="pinStatus" class="muted small">Belum diatur</span></div>
+        <input id="newPin" type="password" inputmode="numeric" maxlength="6" placeholder="Buat PIN 4–6 digit">
+        <button id="setPin" class="primary">Simpan PIN</button><button id="removePin" class="danger-outline full">Nonaktifkan PIN</button>
+      </div>
+      <div class="panel">
+        <h3>Notifikasi pengingat</h3><label class="check-row"><input id="notifyEnabled" type="checkbox"> Aktifkan pengingat harian</label>
+        <div class="setting-row"><span>Waktu pengingat</span><input id="notifyTime" type="time" value="20:00"></div>
+        <button id="saveNotifications" class="primary">Simpan pengingat</button>
+        <p class="muted tiny">Pengingat terjadwal bekerja pada APK Android yang dipasang. Aplikasi harus diberi izin notifikasi di Android.</p>
+      </div>
+      <div class="panel">
+        <h3>Data lokal</h3><button id="exportData" class="secondary full">Ekspor backup JSON</button><label class="file-label">Impor backup JSON<input id="importData" type="file" accept="application/json"></label><button id="clearData" class="danger-outline full">Hapus seluruh data</button>
+      </div>
+      <div class="panel"><h3>Tentang Fight On</h3><p class="muted small">Fight On membantu membangun kebiasaan yang lebih sehat. Aplikasi ini bukan alat diagnosis atau pengganti bantuan profesional.</p><div class="muted tiny">Versi 1.0.0 • Offline-first</div></div>
+    </section>
+  </main>
+
+  <nav class="bottom-nav">
+    <button class="nav-item active" data-page="home"><span>⌂</span>Home</button>
+    <button class="nav-item" data-page="history"><span>◷</span>Riwayat</button>
+    <button class="nav-item" data-page="target"><span>◎</span>Target</button>
+    <button class="nav-item" data-page="statistics"><span>▥</span>Statistik</button>
+    <button class="nav-item" data-page="settings"><span>⚙</span>Setelan</button>
+  </nav>
+  <div id="toast" class="toast"></div>
+  <script src="database.js"></script><script type="module" src="/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+{
+  "appId": "com.fighton.app",
+  "appName": "Fight On",
+  "webDir": "dist",
+  "bundledWebRuntime": false
+}
